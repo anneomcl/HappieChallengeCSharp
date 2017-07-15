@@ -8,6 +8,40 @@ namespace Test
     public class StringAndArrayTests
     {
         [TestMethod]
+        public void TestStringCompression()
+        {
+            CreateStringCompressionTest(null, null);
+            CreateStringCompressionTest(" ", " ");
+            CreateStringCompressionTest("a", "a");
+            CreateStringCompressionTest("aa", "aa");
+            CreateStringCompressionTest("aaa", "a3");
+            CreateStringCompressionTest("aaabbbccdd", "a3b3c2d2");
+            CreateStringCompressionTest("aaaaa  bbbb   ", "a5 2b4 3");
+        }
+
+        public void CreateStringCompressionTest(string test, string expected)
+        {
+            string actual = CompressString(test);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestFormatSpaces()
+        {
+            CreateFormatSpacesTest(null, null);
+            CreateFormatSpacesTest("", "");
+            CreateFormatSpacesTest(" ", "%20");
+            CreateFormatSpacesTest("a", "a");
+            CreateFormatSpacesTest(" a ", "%20a%20");
+        }
+
+        public void CreateFormatSpacesTest(string test, string expected)
+        {
+            string actual = FormatSpaces(test);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void TestIsPermutation()
         {
             CreateIsPermutationTest(null, null, true);

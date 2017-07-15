@@ -106,5 +106,60 @@ namespace ArrayAndStringHelpers
 
             return true;
         }
+
+        public static string FormatSpaces(string input)
+        {
+            if (String.IsNullOrEmpty(input))
+            {
+                return input;
+            }
+
+            string output = input.Replace(" ", "%20");
+
+            return output;
+        }
+
+        public static string CompressString(string input)
+        {
+            if (String.IsNullOrEmpty(input))
+            {
+                return input;
+            }
+
+            System.Text.StringBuilder output = new System.Text.StringBuilder();
+            char letter = input[0];
+            int count = 0;
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (output.Length >= input.Length)
+                {
+                    return input;
+                }
+
+                if (input[i] == letter)
+                {
+                    count++;
+                }
+
+                if (input[i] != letter)
+                {
+                    output.Append(letter);   
+                    output.Append(count.ToString());
+                    count = 1;
+                    letter = input[i];
+                }
+            }
+
+            output.Append(letter);
+            output.Append(count.ToString());
+
+            if (output.Length >= input.Length)
+            {
+                return input;
+            }
+
+            return output.ToString();
+        }
     }
 }
